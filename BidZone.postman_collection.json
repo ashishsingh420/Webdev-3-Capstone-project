@@ -1,0 +1,448 @@
+{
+  "info": {
+    "_postman_id": "a918f03b-d183-4a12-882f-87d90390f1b2",
+    "name": "BidZone Online Auction Platform API",
+    "description": "Comprehensive Postman API collection for BidZone – Online Auction Platform capstone project. Includes Authentication (JWT Access & Refresh tokens), RBAC, Auction CRUD, Live Bidding, Aggregations, and Admin endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "auctionId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register User (Seller)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Marcus Sterling\",\n  \"email\": \"seller@bidzone.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"seller\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Register User (Bidder)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sophia Chen\",\n  \"email\": \"bidder@bidzone.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"bidder\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login (Seller)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.accessToken) { pm.collectionVariables.set('accessToken', json.accessToken); }",
+                  "if (json.refreshToken) { pm.collectionVariables.set('refreshToken', json.refreshToken); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"seller@bidzone.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login (Bidder)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.accessToken) { pm.collectionVariables.set('accessToken', json.accessToken); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"bidder@bidzone.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.accessToken) { pm.collectionVariables.set('accessToken', json.accessToken); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@bidzone.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current Profile (Me)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Access Token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/refresh-token",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "refresh-token"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Auctions",
+      "item": [
+        {
+          "name": "Get All Auctions (Search, Filter, Sort)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions?category=Electronics&status=active&sortBy=endingSoonest",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions"],
+              "query": [
+                { "key": "category", "value": "Electronics" },
+                { "key": "status", "value": "active" },
+                { "key": "sortBy", "value": "endingSoonest" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Auction By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/{{auctionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "{{auctionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Auction (Seller / Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.auction && json.auction._id) { pm.collectionVariables.set('auctionId', json.auction._id); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Vintage Leica M3 Rangefinder Camera\",\n  \"description\": \"Original German rangefinder camera in mint collector condition with 50mm Summicron lens.\",\n  \"category\": \"Collectibles\",\n  \"startingPrice\": 1800,\n  \"endTime\": \"2026-11-28T23:59:59.000Z\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=80\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions"]
+            }
+          }
+        },
+        {
+          "name": "Update Auction (Seller / Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Vintage Leica M3 Rangefinder Camera (Certified)\",\n  \"description\": \"Updated description: Fully serviced by Leica specialist in Munich.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/{{auctionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "{{auctionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Auction (Seller / Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/{{auctionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "{{auctionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Category Sales Aggregation Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/analytics/category-sales",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "analytics", "category-sales"]
+            }
+          }
+        },
+        {
+          "name": "Get Seller's Own Listings",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auctions/seller/my-listings",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auctions", "seller", "my-listings"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Live Bids",
+      "item": [
+        {
+          "name": "Place Bid (Bidder / Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 9500\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bids/{{auctionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bids", "{{auctionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Auction Bid History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bids/{{auctionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bids", "{{auctionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get My Bidding Activity & Won Items",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/bids/my/activity",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bids", "my", "activity"]
+            }
+          }
+        },
+        {
+          "name": "Auction Bid Aggregation Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bids/analytics/{{auctionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bids", "analytics", "{{auctionId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Admin & Metrics",
+      "item": [
+        {
+          "name": "Admin Platform Summary (Aggregation)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/admin/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "admin", "summary"]
+            }
+          }
+        },
+        {
+          "name": "Admin Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            }
+          }
+        },
+        {
+          "name": "Admin Modify User Role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"seller\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/USER_ID/role",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "USER_ID", "role"]
+            }
+          }
+        },
+        {
+          "name": "Top Bidders Leaderboard (Aggregation)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/leaderboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "leaderboard"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
