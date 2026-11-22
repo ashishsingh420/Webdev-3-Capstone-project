@@ -242,8 +242,8 @@ CLIENT_URL=http://localhost:5173
 ### Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/username/bidzone-auction-platform.git
-cd bidzone-auction-platform
+git clone https://github.com/ashishsingh420/Webdev-3-Capstone-project.git
+cd Webdev-3-Capstone-project
 ```
 
 ### Step 2: Configure Environment
