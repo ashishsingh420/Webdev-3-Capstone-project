@@ -1,5 +1,9 @@
 # BidZone – Online Auction Platform
 
+**Student Name:** Ashish Singh
+**Course:** Web Development 3 (MERN Stack Capstone)  
+**Project:** #29 BidZone – Online Auction Platform
+
 [![Tech Stack](https://img.shields.io/badge/Stack-MERN%20%7C%20Socket.IO-6366f1.svg)](#technology-stack)
 [![Architecture](https://img.shields.io/badge/Architecture-MVC%20Backend%20%2B%20Vite%20React-10b981.svg)](#backend-architecture)
 [![License](https://img.shields.io/badge/License-ISC-blue.svg)](#license)
@@ -9,6 +13,7 @@
 ---
 
 ## Table of Contents
+
 1. [Deployed Links](#1-deployed-links)
 2. [Key Features](#2-key-features)
 3. [Technology Stack](#3-technology-stack)
@@ -30,10 +35,10 @@
 
 > The platform is prepared for deployment on modern cloud hosting (e.g., Render, Railway, Vercel, or AWS).
 
-- **Frontend Live Application**: `https://bidzone-auctions.vercel.app` *(Placeholder - configure with production domain)*
-- **Backend API Service**: `https://bidzone-api.onrender.com` *(Placeholder - configure with production domain)*
-- **Database**: MongoDB Atlas Cluster *(Cloud Replica Set)*
-- **Demo Walkthrough Video**: `https://youtube.com/watch?v=bidzone-demo-placeholder` *(Placeholder)*
+- **Frontend Live Application**: `https://bidzone-auctions.vercel.app` _(Placeholder - configure with production domain)_
+- **Backend API Service**: `https://bidzone-api.onrender.com` _(Placeholder - configure with production domain)_
+- **Database**: MongoDB Atlas Cluster _(Cloud Replica Set)_
+- **Demo Walkthrough Video**: `https://youtube.com/watch?v=bidzone-demo-placeholder` _(Placeholder)_
 
 ---
 
@@ -45,9 +50,9 @@
 - **Real-Time Bid Broadcasts**: Socket.IO pushes live bid updates, leading bidder names, and new bid amounts immediately to all active observers without page reloads.
 - **Server-Driven Winner Designation**: Background watcher detects auction expiration down to the exact second, updates the winner on the database, and emits a celebratory event to the auction chamber.
 - **MongoDB Aggregation Pipelines**:
-  1. *Category Sales Analytics*: Computes total listings, active vs. closed listings, gross realized revenue, average bids, and peak prices grouped by item category.
-  2. *Top Bidders Leaderboard*: Ranks top bidders by total participation count and spending volume.
-  3. *Auction-Specific Bid Analytics*: Evaluates bidder participation frequency and highest offers within an individual listing.
+  1. _Category Sales Analytics_: Computes total listings, active vs. closed listings, gross realized revenue, average bids, and peak prices grouped by item category.
+  2. _Top Bidders Leaderboard_: Ranks top bidders by total participation count and spending volume.
+  3. _Auction-Specific Bid Analytics_: Evaluates bidder participation frequency and highest offers within an individual listing.
 - **Dual-Token Authentication**: Secure authentication pairing short-lived JWT Access Tokens (15m) with rotating long-lived JWT Refresh Tokens (7d).
 - **Glassmorphism Pure CSS Interface**: Custom UI built without third-party component frameworks, complying strictly with standard Web APIs.
 
@@ -56,6 +61,7 @@
 ## 3. Technology Stack
 
 ### Backend (Strict Compliance)
+
 - **Runtime**: Node.js (v18+)
 - **Web Framework**: Express.js (`express`)
 - **Database ODM**: Mongoose (`mongoose`)
@@ -63,9 +69,10 @@
 - **Authentication**: JSON Web Tokens (`jsonwebtoken`)
 - **Password Security**: Bcrypt (`bcrypt`)
 - **Configuration**: Dotenv (`dotenv`)
-*(Zero unauthorized libraries used).*
+  _(Zero unauthorized libraries used)._
 
 ### Frontend (Strict Compliance)
+
 - **Library**: React 18 (`react`, `react-dom`)
 - **Routing**: React Router DOM v6 (`react-router-dom`)
 - **Network Layer**: Native Web Fetch API
@@ -115,9 +122,10 @@ backend/
 
 ## 5. Database Architecture & Indexes
 
-Detailed database schema documentation and visual entity relationships are documented in [DATABASE_SCHEMA.md](file:///c:/Users/demon/OneDrive/Desktop/WEB-DEV-3%20CAPSTONE%20PROJECT/DATABASE_SCHEMA.md).
+Detailed database schema documentation and visual entity relationships are documented in [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md).
 
 ### Collections & Indexes
+
 1. **User Collection**:
    - `email`: Indexed with unique constraint `{ email: 1 }`.
    - `role`: Enum `['seller', 'bidder', 'admin']`.
@@ -227,21 +235,25 @@ CLIENT_URL=http://localhost:5173
 ## 10. Installation & Quick Start
 
 ### Prerequisites
+
 - Node.js (v18.0.0 or higher)
 - MongoDB Server running locally on port 27017 (or MongoDB Atlas URI)
 
 ### Step 1: Clone Repository
+
 ```bash
 git clone https://github.com/username/bidzone-auction-platform.git
 cd bidzone-auction-platform
 ```
 
 ### Step 2: Configure Environment
+
 ```bash
 cp backend/.env.example backend/.env
 ```
 
 ### Step 3: Install Dependencies
+
 ```bash
 # Backend dependencies
 cd backend
@@ -253,11 +265,14 @@ npm install
 ```
 
 ### Step 4: Seed Database with Realistic Demo Data
+
 From the `backend` directory, run:
+
 ```bash
 node seed.js
 ```
-*This populates the database with verified admin, seller, and bidder accounts, active luxury auctions with countdown timers, ended items, and live bid histories.*
+
+_This populates the database with verified admin, seller, and bidder accounts, active luxury auctions with countdown timers, ended items, and live bid histories._
 
 **Pre-seeded Demo Accounts:**
 | Role | Email | Password |
@@ -268,7 +283,9 @@ node seed.js
 | **Bidder 2** | `david@bidzone.com` | `Password123!` |
 
 ### Step 5: Start Servers
+
 **Terminal 1 (Backend Server):**
+
 ```bash
 cd backend
 npm start
@@ -276,6 +293,7 @@ npm start
 ```
 
 **Terminal 2 (Frontend Client):**
+
 ```bash
 cd frontend
 npm run dev
@@ -283,13 +301,16 @@ npm run dev
 ```
 
 ### Step 6: Automated Verification Suites
+
 Run the automated backend test suite:
+
 ```bash
 cd backend
 node test-backend.js
 ```
 
 Run the real-time Socket.IO end-to-end verification:
+
 ```bash
 cd backend
 node test-e2e.js
@@ -300,9 +321,11 @@ node test-e2e.js
 ## 11. Postman API Collection
 
 A complete Postman Collection is included in the project root:
-- File: [BidZone.postman_collection.json](file:///c:/Users/demon/OneDrive/Desktop/WEB-DEV-3%20CAPSTONE PROJECT/BidZone.postman_collection.json)
+
+- File: [BidZone.postman_collection.json](BidZone.postman_collection.json)
 
 ### How to Import & Run in Postman:
+
 1. Open Postman.
 2. Click **Import** (top left).
 3. Select `BidZone.postman_collection.json`.
@@ -313,40 +336,44 @@ A complete Postman Collection is included in the project root:
 ## 12. API Reference Documentation
 
 ### Authentication (`/api/auth`)
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `POST` | `/api/auth/register` | Public | Register new user (`name`, `email`, `password`, `role`) |
-| `POST` | `/api/auth/login` | Public | Authenticate user & return access + refresh tokens |
-| `POST` | `/api/auth/refresh-token` | Public | Exchange refresh token for new access token |
-| `POST` | `/api/auth/logout` | Authenticated | Revoke refresh token |
-| `GET` | `/api/auth/me` | Authenticated | Retrieve logged-in user profile |
+
+| Method | Endpoint                  | Access        | Description                                             |
+| ------ | ------------------------- | ------------- | ------------------------------------------------------- |
+| `POST` | `/api/auth/register`      | Public        | Register new user (`name`, `email`, `password`, `role`) |
+| `POST` | `/api/auth/login`         | Public        | Authenticate user & return access + refresh tokens      |
+| `POST` | `/api/auth/refresh-token` | Public        | Exchange refresh token for new access token             |
+| `POST` | `/api/auth/logout`        | Authenticated | Revoke refresh token                                    |
+| `GET`  | `/api/auth/me`            | Authenticated | Retrieve logged-in user profile                         |
 
 ### Auctions (`/api/auctions`)
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/auctions` | Public | Get all auctions with search, category & price filters |
-| `GET` | `/api/auctions/:id` | Public | Get single auction details with populated seller & bids |
-| `GET` | `/api/auctions/analytics/category-sales` | Public | Aggregation: Category-wise sales & volume analytics |
-| `GET` | `/api/auctions/seller/my-listings` | Seller / Admin | Retrieve auctions listed by current seller |
-| `POST` | `/api/auctions` | Seller / Admin | Create new auction item listing |
-| `PUT` | `/api/auctions/:id` | Seller / Admin | Update listing (price locked once bids exist) |
-| `DELETE` | `/api/auctions/:id` | Seller / Admin | Remove listing and associated bids |
+
+| Method   | Endpoint                                 | Access         | Description                                             |
+| -------- | ---------------------------------------- | -------------- | ------------------------------------------------------- |
+| `GET`    | `/api/auctions`                          | Public         | Get all auctions with search, category & price filters  |
+| `GET`    | `/api/auctions/:id`                      | Public         | Get single auction details with populated seller & bids |
+| `GET`    | `/api/auctions/analytics/category-sales` | Public         | Aggregation: Category-wise sales & volume analytics     |
+| `GET`    | `/api/auctions/seller/my-listings`       | Seller / Admin | Retrieve auctions listed by current seller              |
+| `POST`   | `/api/auctions`                          | Seller / Admin | Create new auction item listing                         |
+| `PUT`    | `/api/auctions/:id`                      | Seller / Admin | Update listing (price locked once bids exist)           |
+| `DELETE` | `/api/auctions/:id`                      | Seller / Admin | Remove listing and associated bids                      |
 
 ### Bids (`/api/bids`)
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `POST` | `/api/bids/:auctionId` | Bidder / Admin | Submit live bid (triggers Socket.IO broadcast) |
-| `GET` | `/api/bids/:auctionId` | Public | Retrieve full bid history for an auction |
-| `GET` | `/api/bids/my/activity` | Authenticated | Retrieve user's bidding history and won acquisitions |
-| `GET` | `/api/bids/analytics/:auctionId` | Public | Aggregation: Bidder behavior analytics for auction |
+
+| Method | Endpoint                         | Access         | Description                                          |
+| ------ | -------------------------------- | -------------- | ---------------------------------------------------- |
+| `POST` | `/api/bids/:auctionId`           | Bidder / Admin | Submit live bid (triggers Socket.IO broadcast)       |
+| `GET`  | `/api/bids/:auctionId`           | Public         | Retrieve full bid history for an auction             |
+| `GET`  | `/api/bids/my/activity`          | Authenticated  | Retrieve user's bidding history and won acquisitions |
+| `GET`  | `/api/bids/analytics/:auctionId` | Public         | Aggregation: Bidder behavior analytics for auction   |
 
 ### Users & Admin (`/api/users`)
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/users/leaderboard` | Public | Aggregation: Top bidders leaderboard |
-| `GET` | `/api/users/admin/summary` | Admin Only | Aggregation: Platform overview & sales KPIs |
-| `GET` | `/api/users` | Admin Only | Retrieve all registered users |
-| `PATCH`| `/api/users/:id/role` | Admin Only | Reassign user role (`seller`, `bidder`, `admin`) |
+
+| Method  | Endpoint                   | Access     | Description                                      |
+| ------- | -------------------------- | ---------- | ------------------------------------------------ |
+| `GET`   | `/api/users/leaderboard`   | Public     | Aggregation: Top bidders leaderboard             |
+| `GET`   | `/api/users/admin/summary` | Admin Only | Aggregation: Platform overview & sales KPIs      |
+| `GET`   | `/api/users`               | Admin Only | Retrieve all registered users                    |
+| `PATCH` | `/api/users/:id/role`      | Admin Only | Reassign user role (`seller`, `bidder`, `admin`) |
 
 ---
 
@@ -363,11 +390,12 @@ A complete Postman Collection is included in the project root:
 ## 14. Viva & Technical Demo Guide
 
 ### Key Technical Talking Points
+
 1. **Explain the MVC Architecture**:
-   - *Models* define Mongoose schemas, field validators, pre-save hooks (bcrypt hashing), and indexes.
-   - *Controllers* encapsulate business logic (bid validation, calculations, DB queries).
-   - *Routes* map HTTP methods and apply security middleware (`authenticate`, `authorizeRoles`).
-   - *Middleware* provides centralized error handling and JWT verification.
+   - _Models_ define Mongoose schemas, field validators, pre-save hooks (bcrypt hashing), and indexes.
+   - _Controllers_ encapsulate business logic (bid validation, calculations, DB queries).
+   - _Routes_ map HTTP methods and apply security middleware (`authenticate`, `authorizeRoles`).
+   - _Middleware_ provides centralized error handling and JWT verification.
 
 2. **How Real-Time Bidding Works**:
    - Clients connect via WebSocket and join a room designated by the auction ID (`socket.join('auction_' + id)`).
@@ -383,4 +411,5 @@ A complete Postman Collection is included in the project root:
 ---
 
 ## License
+
 ISC © BidZone Engineering Team
