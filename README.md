@@ -33,11 +33,11 @@
 
 ## 1. Deployed Links
 
-> The platform is prepared for deployment on modern cloud hosting (e.g., Render, Railway, Vercel, or AWS).
-
-- **Frontend Live Application**: `https://bidzone-auctions.vercel.app` _(Placeholder - configure with production domain)_
-- **Backend API Service**: `https://bidzone-api.onrender.com` _(Placeholder - configure with production domain)_
-- **Database**: MongoDB Atlas Cluster _(Cloud Replica Set)_
+- **Frontend Live Application (Vercel)**: [https://webdev-3-capstone-project.vercel.app](https://webdev-3-capstone-project.vercel.app)
+- **Backend API Service (Render)**: [https://webdev-3-capstone-project.onrender.com](https://webdev-3-capstone-project.onrender.com)
+- **API Health Check Endpoint**: [https://webdev-3-capstone-project.onrender.com/api/health](https://webdev-3-capstone-project.onrender.com/api/health)
+- **GitHub Repository**: [https://github.com/ashishsingh420/Webdev-3-Capstone-project](https://github.com/ashishsingh420/Webdev-3-Capstone-project)
+- **Database**: MongoDB Atlas Cluster *(Cloud Replica Set)*
 - **Demo Walkthrough Video**: `https://youtube.com/watch?v=bidzone-demo-placeholder` _(Placeholder)_
 
 ---
